@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="navbar.css">
+
+<body>
+<div class="nav">
+    <ul>
+        <li><a id="home" href="landing.html">AMS HOLIDAY</a></li>
+        <span class="home">
+                <!-- <li><a href="landing.html">Home</a></li> -->
+        </span>
+    </ul>
+</div>
+<div class="back">
+    <h1>Login</h1>
+    <div class="box">
+        <form action="login.php" method="POST" autocomplete="off">
+        <div class="imgcontainer">
+            <img src="https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" id="name" required>
+            <span class="error_form" id="name_error"></span>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+                
+            <button type="submit"><a href="index.html">Login</a></button>
+
+            <button type="button" class="cancelbtn"><a href="login.html">Reset</a></button>
+            <button type="button" class="signupbtn"><a href="signup.html">Signup</a></button>
+        </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Not displaying the error messages when page loads
+        $("#name_error").hide();
+
+        var error_name = false;
+
+        $("#name").focusout(function () {
+            check_name();
+        });
+
+        function check_name() {
+            var pattern = /^[a-zA-Z]*$/; // Regular expression for alphabets
+            var name = $("#name").val()
+            if (pattern.test(name) && name !== '') { //Check if only alphabets and name value not empty
+                $("#name_error").hide();
+                $("#name").css("border", "2px solid green");//Give Green border
+            } else {
+                // $("#name_error").html("Should Contain Only Alphabets");
+                // $("#name_error").css("color", "red");
+                // $("#name_error").show();//Show error message
+                $("#name").css("border", "2px solid red");// Give red border
+                error_name = true; //
+            }
+        }
+
+        $("#login").submit(function () {
+            //all the variables are turned to false
+            error_name = false;
+
+            // checking if any input is showing error messages
+            //Because if they aren't then all variables should be false
+            check_name();
+
+            //Checking if variables have become true or still false
+            if (error_name === false) {
+                alert("Login Successfull!!");
+                return true; // form will be submitted
+            } else {
+                alert("Please Fill the Form Correctly!!");
+                return false; // form rejected
+            }
+        });
+    });
+</script>
+</body>
+</html>
